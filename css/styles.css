@@ -13,7 +13,11 @@ body {
   padding-bottom: 75px;
 }
 
-p {
-  color: blue;
-  font-size: 20px;
+/*p {*/
+/*  color: blue;*/
+/*  font-size: 20px;*/
+/*}*/
+
+#data {
+  font-family: arial;
 }
