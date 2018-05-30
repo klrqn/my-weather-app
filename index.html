@@ -14,21 +14,23 @@
     <!--[if lt IE 9]>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script>
   <![endif]-->
-  
+
 </head>
 
 <body>
-    <h1>
-        The Weather App
-    </h1>
-    <div id="weather">
+    <div class="container">
+        <div id="header">
+            <h1>The Weather App</h1>
+        </div>
 
-        <img id="weatherIcon" alt="the weather image dependent on ... weather">
+        <p id="loc"></p>
+        <p id="temp"></p>
+
+        <div id="icon"></div>
 
     </div>
-    <div id="byMe">
-        <script src="js/scripts.js"></script>
-    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="main.js"></script>
 </body>
 
 </html>
