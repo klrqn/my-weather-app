@@ -24,7 +24,7 @@ input[type="text"] {
 #yourCoords {
   height: 50px;
   font-size: 30px;
-  width: 80%;
+  width: 50%;
   background-color: green;
 }
 
@@ -33,4 +33,8 @@ input[type="text"] {
 }
 #description {
   padding: 40px;
+}
+
+#error {
+  color: red;
 }

@@ -1,93 +1,6 @@
-$(document).ready(function(){
+var weatherIcons =
 
-	// get weather data by city
-	$("#submitCoords").click(function(){
-
-		var latitude = $("#latitude").val();
-		var longitude = $("#longitude").val();
-
-		if (latitude != "" && longitude != "") {
-			$("#error").attr("display", "none");
-
-			$.ajax({
-
-				url: `https://fcc-weather-api.glitch.me/api/current?lat=${latitude}&lon=${longitude}`,
-				type: "GET",
-				dataType: "json",
-				success: function(data) {
-
-					// console.log(data);
-
-					$("#city").text(data.name);
-
-					const tempC = Math.round(data.main.temp);
-					$("#temperature").text(`${tempC} Degrees Celcius`);
-					$("#status").html(data.weather[0].main);
-					$("#description").text(data.weather[0].description);
-
-					$("#unitswitch").click(function() {
-						var temperature = parseInt(document.getElementById("temperature").innerHTML);
-						console.log(temperature);
-						if ($("#temperature").attr("value") == 'celcius') {
-							console.log('switching to fahrenheit');
-							var tempF = parseInt(temperature * 9/5 + 32);
-							console.log(temperature + ' * 9/5 + 32 =', tempF)
-							$("#temperature").text(`${tempF} Degrees Fahrenheit`)
-															 .attr("value", "fahrenheit");
-							$("#unitswitch").text("Celcius");
-						} else {
-							console.log('switching to celcius');
-							$("#temperature").text(`${tempC} Degrees Celcius`)
-															 .attr("value", "celcius");
-
-							$("#unitswitch").text("Fahrenheit");
-						}
-					});
-				}
-
-			});
-
-		} else {
-			$("#error").html("Please Enter a Location");
-		}
-	});
-
-
-	$("#yourCoords").click(function() {
-
-		if (navigator.geolocation) {
-			navigator.geolocation.getCurrentPosition(function(pos){
-
-				var latitude = pos.coords.latitude;
-				var longitude = pos.coords.longitude;
-
-				$.ajax({
-
-					url: `https://fcc-weather-api.glitch.me/api/current?lat=${latitude}&lon=${longitude}`,
-					type: "GET",
-					dataType: "json",
-					success: function(data) {
-
-					console.log(data);
-
-					$("#city").text(data.name);
-
-					var tempC = Math.round(data.main.temp);
-					$("#temperature").text(`${tempC} Degrees Celcius`);
-					$("#status").html(data.weather[0].main);
-					$("#description").text(data.weather[0].description);
-
-				}
-
-			});
-
-			});
-		}
-
-	});
-
-	var weatherIcons =
-	{
+{
   "200": {
     "label": "thunderstorm with light rain",
     "icon": "storm-showers"
@@ -454,8 +367,3 @@ $(document).ready(function(){
     "icon": "cloudy-gusts"
   }
 }
-
-req = $.getJSON('http://api.openweathermap.org/data/2.5/weather?q=London,uk&callback=?');
-
-
-});
