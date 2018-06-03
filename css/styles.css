@@ -5,15 +5,18 @@ body {
   text-align: center;
 }
 
-.header > h1 {
-  height: 20px;
-  font-size: 75px;
-  margin-bottom: 75px;
-  color: white;
-  padding-bottom: 75px;
+#cityInput{
+  margin: auto;
+  text-align: center;
+  width: 60%;
 }
 
+input[type="text"] {
+  height:40px;
+  font-size: 20px;
+}
 
-#data {
-  font-family: arial;
+#submitCity {
+  height:40px;
+  font-size: 20px;
 }
