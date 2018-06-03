@@ -19,19 +19,37 @@
 
 <body>
 
-    <div class="jumbotron" style="margin-bottom:20px; color:white; background-color:#4aa1f3">
-        <h2 class="text-center" style="font-size:50px; font-weight:600">Get Current Weather</h2>
+    <div class="jumbotron" style="margin-bottom: 5px; color:white; background-color:#4aa1f3">
+        <h2 class="text-center" style="font-size:30px; font-weight:900">Get Current Weather</h2>
     </div>
 
     <div class="container">
         <div class="row" style="margin-bottom: 10px">
-            <h3 class="text-center text-primary">Enter City Name</h3>
+            <h3 class="text-center text-primary">Enter Coordinates</h3>
+            <span id="error"></span>
         </div>
 
-        <div class="row form-group form-inline" id="cityInput">
-            <input type="text" name="city" id="city" class="form-control" placeholder="City Name">
-            <button id="submitCity" class="btn btn-primary">Search City</button>
+        <div class="row form-group form-inline" id="coordInput">
+            <input type="text" name="latitude" class="coordinput" id="latitude" class="form-control" placeholder="latitude">
+            <input type="text" name="longitude" class="coordinput" id="longitude" class="form-control" placeholder="longitude">
+            <button id="submitCoords" class="btn btn-primary">Get Weather</button>
         </div>
+
+        <div class="row" style="margin-top:30px">
+            <button id="yourCoords" class="btn btn-primary">Use Your Coordinates</button>
+        </div>
+
+        <div id="results">
+            <h2 id="city"></h2>
+            <div class="row form-group form-inline">
+                <h3 id="temperature" class="form-control" value="Celcius"></h3>
+                <button class="form-control" id="unitswitch">Fahrenheit</button>
+            </div>
+
+            <h3 id="status"></h3>
+            <p id="description"></p>
+        </div>
+
 
     </div>
 
@@ -63,7 +81,7 @@
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"
   integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
   crossorigin="anonymous"></script>
-    <script type="text/javascript" src="app.js"></script>
+  <script type="text/javascript" src="app.js"></script>
 </body>
 
 </html>

@@ -1,74 +1,88 @@
-var temp;
-var location;
-var icon;
-var humidity;
-var wind;
+$(document).ready(function(){
 
-var latitude;
-var longitude;
-var apiCall;
+	// get weather data by city
+	$("#submitCoords").click(function(){
 
-function update(weather) {
-	temp.innerHTML = weather.temp;
-	location.innerHTML = weather.location;
-	humidity.innerHTML = weather.humidity;
-	wind.innerHTML = weather.wind;
-	icon.src = `imgs/code/${weather.icon}.png`;
+		var latitude = $("#latitude").val();
+		var longitude = $("#longitude").val();
 
-}
+		if (latitude != "" && longitude != "") {
 
-window.onload = function() {
-	/* code here */
-	// temp = $("#temperature");
-	// location = $("#location");
-	// icon = $("#icon");
-	// humidity = $("#humidity");
-	// wind = $("#wind");
+			$.ajax({
 
-	// var weather = {};
-	// weather.temp = 70;
-	// weather.location = "Providence";
-	// weather.humidity = `5%`;
-	// weather.wind = 3.5;
-	// weather.icon = 200;
-	function yourWeather(latitude, longitude) {
-		var api = apiCall;
+				url: `https://fcc-weather-api.glitch.me/api/current?lat=${latitude}&lon=${longitude}`,
+				type: "GET",
+				dataType: "json",
+				success: function(data) {
 
-		$.ajax({
+					// console.log(data);
 
-			url: api,
-			success: function(forecast){
-				$("#location").text(forecast.name);
+					$("#city").text(data.name);
 
-				var tempC = Math.round(forecast.main.temp);
-				var tempF = Math.round(tempC * (9/5) + 32);
+					var tempC = Math.round(data.main.temp);
+					$("#temperature").text(`${tempC} Degrees Celcius`);
+					$("#weather").text(data.weather[0].main);
+					$("#description").text(data.weather[0].description);
 
-				$("#temp").text(tempF + ' F')
+				}
 
+			});
 
-			}
-		})
-	}
+		} else {
+			$("#error").html("Please Enter a Location");
+		}
 
+	});
 
+	$("#unitswitch").click(function() {
+		var temperature = parseInt(document.getElementById("temperature").innerHTML);
+		console.log(temperature);
+		if ($("#temperature").attr("value") == 'celcius') {
+			console.log('switching to fahrenheit');
+			var tempF = parseInt(temperature * 9/5 + 32);
+			$("#temperature").text(`${tempF} Degrees Fahrenheit`)
+											 .attr("value", "fahrenheit");
+			$("#unitswitch").text("Celcius");
+		} else {
+			console.log('switching to celcius');
+			var tempC = parseInt(temperature * 5/9 - 32);
+			$("#temperature").text(`${tempC} Degrees Celcius`)
+											 .attr("value", "celcius");
 
+			$("#unitswitch").text("Fahrenheit");
+		}
+	});
 
-	function yourLocation() {
+	$("#yourCoords").click(function() {
 
-		if (navigator.geolocation){
+		if (navigator.geolocation) {
 			navigator.geolocation.getCurrentPosition(function(pos){
 
-			latitude = pos.coords.latitude;
-			longitude = pos.coords.longitude;
+				var latitude = pos.coords.latitude;
+				var longitude = pos.coords.longitude;
 
-			apiCall = `https://fcc-weather-api.glitch.me/api/current?lat=${latitude}&lon=${longitude}`;
+				$.ajax({
+
+					url: `https://fcc-weather-api.glitch.me/api/current?lat=${latitude}&lon=${longitude}`,
+					type: "GET",
+					dataType: "json",
+					success: function(data) {
+
+					console.log(data);
+
+					$("#city").text(data.name);
+
+					var tempC = Math.round(data.main.temp);
+					$("#temperature").text(`${tempC} Degrees Celcius`);
+
+					$("#description").text(data.weather[0].description);
+
+				}
+
 			});
-		} else {
-			$("#title").text('No Location');
+
+			});
 		}
-	}
 
-
-	// update(weather);
-
-};
+	});
+});
